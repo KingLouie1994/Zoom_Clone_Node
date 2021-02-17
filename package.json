@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/KingLouie1994/Zoom_Clone_Node/issues"
   },
-  "homepage": "https://github.com/KingLouie1994/Zoom_Clone_Node#readme"
+  "homepage": "https://github.com/KingLouie1994/Zoom_Clone_Node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
