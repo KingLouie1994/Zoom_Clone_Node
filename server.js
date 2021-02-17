@@ -4,8 +4,11 @@ const express = require("express");
 // Initialising the application invoking express
 const server = express();
 
+// Access to files in public folder
+server.use(express.static("public"));
+
 // Imports of third party libraries
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
 
 // Set ejs as view engine
 server.set("view engine", "ejs");
