@@ -1,0 +1,20 @@
+{
+  "name": "zoom_clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KingLouie1994/Zoom_Clone_Node.git"
+  },
+  "author": "Luis Schekerka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KingLouie1994/Zoom_Clone_Node/issues"
+  },
+  "homepage": "https://github.com/KingLouie1994/Zoom_Clone_Node#readme"
+}
