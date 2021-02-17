@@ -22,8 +22,9 @@ app.set("view engine", "ejs");
 
 // Using socket.io for real time communication
 io.on("connection", (socket) => {
-  socket.on("join-room", () => {
-    console.log("Joined room!");
+  socket.on("join-room", (roomId) => {
+    socket.join(roomId);
+    socket.to(roomId).broadcast.emit("user-connected");
   });
 });
 

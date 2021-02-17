@@ -1,4 +1,4 @@
-const socket = io('/')
+const socket = io("/");
 
 // Create a video element
 const myVideo = document.createElement("video");
@@ -22,7 +22,14 @@ navigator.mediaDevices
   });
 
 // Using socket.io to detect if someone joins a room
-socket.emit("join-room");
+socket.emit("join-room", ROOM_ID);
+socket.on("user-connected", () => {
+  connectToNewUser();
+});
+
+const connectToNewUser = () => {
+  console.log("new user");
+};
 
 // Function to append the video stream to ejs file
 const addVideoStream = (video, stream) => {
