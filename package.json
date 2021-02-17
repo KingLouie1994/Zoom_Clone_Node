@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/KingLouie1994/Zoom_Clone_Node#readme",
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1"
   },
   "devDependencies": {
