@@ -2,7 +2,7 @@ const socket = io("/");
 
 // Create a video element
 const myVideo = document.createElement("video");
-myVideo.muted = false;
+myVideo.muted = true;
 
 // Initialising peerjs
 var peer = new Peer(undefined, {
@@ -92,7 +92,32 @@ const muteUnmute = () => {
 };
 
 // Handle camera on/off
+const setStopVideo = () => {
+  const html = `
+    <i class="fas fa-video"></i>
+    <span>Stop Video</span>
+  `;
+  document.querySelector(".main__video__button").innerHTML = html;
+};
 
+const setPlayVideo = () => {
+  const html = `
+    <i class="stop fas fa-video-slash"></i>
+    <span>Play Video</span>
+  `;
+  document.querySelector(".main__video__button").innerHTML = html;
+};
+
+const playStop = () => {
+  let enabled = myVideoStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getVideoTracks()[0].enabled = false;
+    setPlayVideo();
+  } else {
+    setStopVideo();
+    myVideoStream.getVideoTracks()[0].enabled = true;
+  }
+};
 
 // Handle messages
 let message = $("input");
@@ -111,4 +136,11 @@ socket.on("createMessage", (message) => {
 const scrollToBottom = () => {
   const d = $(".main__chat__window");
   d.scrollTop(d.prop("scrollHeight"));
+};
+
+// Handle leave meeting
+const closeWindow = () => {
+  if (confirm("Really want to leave meeting?")) {
+    close();
+  }
 };

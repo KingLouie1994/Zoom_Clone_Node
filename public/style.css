@@ -52,7 +52,7 @@ video {
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
-  min-width: 80px;
+  width: 150px;
   cursor: pointer;
 }
 
@@ -71,7 +71,7 @@ video {
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
-  min-width: 80px;
+  width: 100px;
   cursor: pointer;
 }
 
@@ -84,11 +84,30 @@ video {
   font-size: 24px;
 }
 
+.main__video__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.main__video__button:hover {
+  border-radius: 5px;
+  background-color: #343434;
+}
+
+.main__video__button i {
+  font-size: 24px;
+}
+
 .unmute {
   color: red;
 }
 
-.leave_meeting {
+.stop {
   color: red;
 }
 
