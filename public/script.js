@@ -4,6 +4,7 @@ const socket = io("/");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 
+// Initialising peerjs
 var peer = new Peer(undefined, {
   path: "/peerjs",
   host: "/",
@@ -44,6 +45,7 @@ peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id);
 });
 
+// Using peerjs to 'call' the other users in the room
 const connectToNewUser = (userId, stream) => {
   const call = peer.call(userId, stream);
   const video = document.createElement("video");
