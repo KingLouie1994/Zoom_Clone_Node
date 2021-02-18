@@ -65,6 +65,29 @@ video {
   font-size: 24px;
 }
 
+.main__mute__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  min-width: 80px;
+  cursor: pointer;
+}
+
+.main__mute__button:hover {
+  border-radius: 5px;
+  background-color: #343434;
+}
+
+.main__mute__button i {
+  font-size: 24px;
+}
+
+.unmute {
+  color: red;
+}
+
 .leave_meeting {
   color: red;
 }
@@ -88,6 +111,18 @@ video {
 .main__chat__window {
   overflow-y: scroll;
   flex-grow: 1;
+}
+
+.main__chat__window::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.main__chat__window::-webkit-scrollbar-thumb {
+  background: #3d3d42;
+}
+
+.main__chat__window::-webkit-scrollbar-track {
+  background: #242324;
 }
 
 .messages {

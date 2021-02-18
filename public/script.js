@@ -2,7 +2,7 @@ const socket = io("/");
 
 // Create a video element
 const myVideo = document.createElement("video");
-myVideo.muted = true;
+myVideo.muted = false;
 
 // Initialising peerjs
 var peer = new Peer(undefined, {
@@ -21,11 +21,11 @@ let myVideoStream;
 navigator.mediaDevices
   .getUserMedia({
     video: true,
-    audio: false,
+    audio: true,
   })
   .then((stream) => {
     myVideoStream = stream;
-    addVideoStream(myVideo, stream);
+    addVideoStream(myVideo, myVideoStream);
     // Using peerjs to 'answer' an incoming call
     peer.on("call", (call) => {
       call.answer(stream);
@@ -62,6 +62,37 @@ const addVideoStream = (video, stream) => {
   });
   videoGrid.append(video);
 };
+
+// Handle mute and unmute
+const setMuteButton = () => {
+  const html = `
+    <i class="fas fa-microphone"></i>
+    <span>Mute</span>
+  `;
+  document.querySelector(".main__mute__button").innerHTML = html;
+};
+
+const setUnmuteButton = () => {
+  const html = `
+    <i class="unmute fas fa-microphone-slash"></i>
+    <span>Unmute</span>
+  `;
+  document.querySelector(".main__mute__button").innerHTML = html;
+};
+
+const muteUnmute = () => {
+  const enabled = myVideoStream.getAudioTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getAudioTracks()[0].enabled = false;
+    setUnmuteButton();
+  } else {
+    setMuteButton();
+    myVideoStream.getAudioTracks()[0].enabled = true;
+  }
+};
+
+// Handle camera on/off
+
 
 // Handle messages
 let message = $("input");
