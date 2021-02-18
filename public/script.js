@@ -4,6 +4,12 @@ const socket = io("/");
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 
+var peer = new Peer(undefined, {
+  path: "/peerjs",
+  host: "/",
+  port: "4000",
+});
+
 // Create variable that accesses div in ejs file
 const videoGrid = document.getElementById("video-grid");
 
@@ -14,21 +20,36 @@ let myVideoStream;
 navigator.mediaDevices
   .getUserMedia({
     video: true,
-    audio: true,
+    audio: false,
   })
   .then((stream) => {
     myVideoStream = stream;
-    addVideoStream(myVideo, myVideoStream);
+    addVideoStream(myVideo, stream);
+    // Using peerjs to 'answer' an incoming call
+    peer.on("call", (call) => {
+      call.answer(stream);
+      const video = document.createElement("video");
+      call.on("stream", (userVideoStream) => {
+        addVideoStream(video, userVideoStream);
+      });
+    });
+    // Using socket.io to detect if someone joins a room
+    socket.on("user-connected", (userId) => {
+      connectToNewUser(userId, stream);
+    });
   });
 
-// Using socket.io to detect if someone joins a room
-socket.emit("join-room", ROOM_ID);
-socket.on("user-connected", () => {
-  connectToNewUser();
+// Using peerjs and socket.io to add user to room
+peer.on("open", (id) => {
+  socket.emit("join-room", ROOM_ID, id);
 });
 
-const connectToNewUser = () => {
-  console.log("new user");
+const connectToNewUser = (userId, stream) => {
+  const call = peer.call(userId, stream);
+  const video = document.createElement("video");
+  call.on("stream", (userVideoStream) => {
+    addVideoStream(video, userVideoStream);
+  });
 };
 
 // Function to append the video stream to ejs file

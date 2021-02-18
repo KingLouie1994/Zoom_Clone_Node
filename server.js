@@ -16,15 +16,22 @@ app.use(express.static("public"));
 // Imports of third party libraries
 const { v4: uuidv4 } = require("uuid");
 const io = require("socket.io")(server);
+const { ExpressPeerServer } = require("peer");
+
+// Using peer.js to use WebRTC in a simple way
+const peerServer = ExpressPeerServer(server, {
+  debug: true,
+});
+app.use("/peerjs", peerServer);
 
 // Set ejs as view engine
 app.set("view engine", "ejs");
 
 // Using socket.io for real time communication
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomId) => {
+  socket.on("join-room", (roomId, userId) => {
     socket.join(roomId);
-    socket.to(roomId).broadcast.emit("user-connected");
+    socket.to(roomId).broadcast.emit("user-connected", userId);
   });
 });
 
