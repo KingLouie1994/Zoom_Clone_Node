@@ -17,6 +17,7 @@ app.use(express.static("public"));
 const { v4: uuidv4 } = require("uuid");
 const io = require("socket.io")(server);
 const { ExpressPeerServer } = require("peer");
+require("dotenv").config();
 
 // Using peer.js to use WebRTC in a simple way
 const peerServer = ExpressPeerServer(server, {
@@ -48,4 +49,4 @@ app.get("/:room", (req, res, next) => {
 });
 
 // Server listens
-server.listen(4000);
+server.listen(process.env.PORT || 4000);
