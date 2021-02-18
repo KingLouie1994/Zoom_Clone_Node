@@ -62,3 +62,22 @@ const addVideoStream = (video, stream) => {
   });
   videoGrid.append(video);
 };
+
+// Handle messages
+let message = $("input");
+$("html").keydown((e) => {
+  if (e.which == 13 && message.val().length !== 0) {
+    socket.emit("message", message.val());
+    message.val("");
+  }
+});
+
+socket.on("createMessage", (message) => {
+  $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+  scrollToBottom();
+});
+
+const scrollToBottom = () => {
+  const d = $(".main__chat__window");
+  d.scrollTop(d.prop("scrollHeight"));
+};
