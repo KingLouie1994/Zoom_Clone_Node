@@ -52,7 +52,7 @@ video {
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
-  min-width: 80px;
+  width: 150px;
   cursor: pointer;
 }
 
@@ -65,7 +65,49 @@ video {
   font-size: 24px;
 }
 
-.leave_meeting {
+.main__mute__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.main__mute__button:hover {
+  border-radius: 5px;
+  background-color: #343434;
+}
+
+.main__mute__button i {
+  font-size: 24px;
+}
+
+.main__video__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+.main__video__button:hover {
+  border-radius: 5px;
+  background-color: #343434;
+}
+
+.main__video__button i {
+  font-size: 24px;
+}
+
+.unmute {
+  color: red;
+}
+
+.stop {
   color: red;
 }
 
@@ -86,7 +128,25 @@ video {
 }
 
 .main__chat__window {
+  overflow-y: scroll;
   flex-grow: 1;
+}
+
+.main__chat__window::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.main__chat__window::-webkit-scrollbar-thumb {
+  background: #3d3d42;
+}
+
+.main__chat__window::-webkit-scrollbar-track {
+  background: #242324;
+}
+
+.messages {
+  list-style: none;
+  color: #f5f5f5;
 }
 
 .main__message__container {
